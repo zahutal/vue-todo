@@ -1,7 +1,14 @@
 <template>
   <div class="todo">
     <section class="hello flex-item">
-      <h2 class="title">Hi {{ userName }}</h2>
+      <h2 class="title hello-title">
+        Hi
+        <template v-if="userName">
+          <span>{{ userName }}</span>
+          <button class="correct-name"
+            @click="correctName">You're not {{ userName }}?</button>
+        </template>
+      </h2>
       <div v-if="!userName">
         <p class="para">what's your name?</p>
         <input v-model.lazy="userName" />
@@ -11,15 +18,14 @@
     <section class="todo-list flex-item">
       <div class="list-add flex-item">
         <h2 class="title">Add to your list:</h2>
-        <input placeholder="New item" v-model="todoItem"/>
-        <button class="btn-add" @click="addItem(todoItem)">Add</button>
+        <input placeholder="New item" v-model="todoItem" />
+        <button class="btn-add" 
+          @click="addItem(todoItem)">Add</button>
       </div>
       <div class="list-list flex-item">
         <h2 class="title">Your list:</h2>
         <ul class="list">
-          <li class="list-item" v-for="item in todoList" :key="item">
-            {{item}}
-          </li>
+          <li class="list-item" v-for="item in todoList" :key="item">{{item}}</li>
         </ul>
       </div>
     </section>
@@ -34,16 +40,17 @@ export default {
   },
   methods: {
     addItem: function(value) {
-      console.log("pingu", this);
-      console.log(this.todoList);
       this.todoList.push(value);
+    },
+    correctName: function() {
+      this.userName = "";
     }
   },
   data: function() {
     return {
-      userName: false,
+      userName: "",
       todoItem: "",
-      todoList: ['zrobic paczingsun', 'uakame']
+      todoList: []
     };
   }
 };
@@ -59,6 +66,9 @@ export default {
   font-size: 18px;
   font-weight: bold;
 }
+.hello-title {
+  font-size: 24px;
+}
 .todo-list {
   margin-top: 40px;
   padding: 40px;
@@ -73,6 +83,7 @@ export default {
 }
 .list-add {
   flex-grow: 1;
+  min-width: 33%;
 }
 .list-list {
   flex-grow: 2;
@@ -83,6 +94,17 @@ export default {
 .list-item {
   display: block;
   padding-bottom: 10px;
+}
+.correct-name {
+  display: block;
+  margin: 5px auto 0;
+  padding: 5px 5px;
+  border: none;
+  color: #38495a;
+  font-size: 10px;
+  text-decoration: underline;
+  background: none;
+  cursor: pointer;
 }
 a {
   color: #42b983;
