@@ -1,0 +1,8 @@
+ToDo todo:
+- edycja taska 'zrobione'
+- button 'czysc zrobione' usuwa zrobione
+- zapisywanie list w localstore
+- zapisywanie userów w localstore
+
+Nice to have:
+- etykiety do tasków
