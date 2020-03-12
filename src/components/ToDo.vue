@@ -29,7 +29,7 @@
             :key="item.id"
             @click="toggleCompleted(item)"
             :class="{ 'completed': item.completed }">
-              {{item.value}} completed? {{ item.completed }}
+              {{item.value}}
             </li>
         </ul>
       </div>
@@ -45,13 +45,11 @@ export default {
   },
   methods: {
     addItem: function(value) {
-      console.log('pushing');
       this.todoList.push({
         id: this.currentId,
         value,
         completed: false
       });
-      console.log('value', value);
       this.currentId = this.currentId + 1;
       this.todoItem = "";
     },
@@ -132,9 +130,12 @@ export default {
   background: none;
   cursor: pointer;
 }
+
 .completed {
   color: grey;
+  text-decoration: line-through;
 }
+
 a {
   color: #42b983;
 }
